@@ -1,0 +1,15 @@
+FROM debian:11
+
+RUN apt -y update && \
+    apt -y install build-essential git curl zip unzip pkg-config
+
+WORKDIR /
+
+RUN git clone https://github.com/microsoft/vcpkg.git && \
+    cd /vcpkg && \
+    ./bootstrap-vcpkg.sh
+
+ENV VCPKG_ROOT="/vcpkg"
+ENV PATH="$PATH:/vcpkg"
+
+CMD [ "vcpkg" ]
