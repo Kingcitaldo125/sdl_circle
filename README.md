@@ -9,4 +9,4 @@ After the building is complete, a local directory will be created with the outpu
 You should be able to see a `main` executable in a new `build/` directory in the project directory if the build were successful.
 
 ## Running
-Run with `./build/main`
+Run with `./run.sh` on Linux.
