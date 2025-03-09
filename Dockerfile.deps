@@ -1,0 +1,14 @@
+FROM vcpkg:2024.10.21 AS deps
+
+WORKDIR /app/
+
+COPY vcpkg.json .
+
+RUN apt -y install build-essential cmake autoconf automake libtool pkg-config python3-pip libxext-dev libwayland-dev libxkbcommon-dev libegl1-mesa-dev libibus-1.0-dev
+RUN pip install jinja2
+
+RUN export VCPKG_ROOT="${VCPKG_ROOT}" && export PATH="$PATH:${VCPKG_ROOT}" && vcpkg install
+
+ENV VCPKG_ROOT="${VCPKG_ROOT}" PATH="$PATH:${VCPKG_ROOT}"
+
+CMD [ "vcpkg" ]

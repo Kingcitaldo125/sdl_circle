@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include <iostream>
 
 #include <SDL.h>
@@ -20,7 +22,29 @@ int main()
     render.SetDrawColor({0,0,0});
     render.Clear();
 
-    SDL_Delay(1000);
+    constexpr int midx = WINX / 2;
+    constexpr int midy = WINY / 2;
+    constexpr int circle_rad = 50;
+
+    render.SetDrawColor({0,255,0});
+    render.DrawPoint(midx, midy);
+
+    render.SetDrawColor({255,0,0});
+
+    for(int i = 0; i < 360; ++i)
+    {
+        const int x = cos(i) * circle_rad;
+        const int y = sin(i) * circle_rad;
+
+        const int end_x = x + midx;
+        const int end_y = y + midy;
+
+        render.DrawPoint(end_x, end_y);
+    }
+
+    render.Present();
+
+    SDL_Delay(5000);
 
     return 0;
 }
